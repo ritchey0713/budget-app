@@ -2,15 +2,6 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
 
 
-
-
-
-const EditExpensePage = () => (
-  <div>
-    This is from my edit expense component
-  </div>
-);
-
 const HelpPage = () => (
   <div>
     This is from my help component
