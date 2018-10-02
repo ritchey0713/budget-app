@@ -1,1 +1,5 @@
-console.log("hello")
+import { createStore} from 'redux'
+
+const store = createStore((state) => {
+
+});
