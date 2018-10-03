@@ -65,8 +65,18 @@ const filtersDefaultState = {
   endDate: undefined
 }
 
+const setTextFilter = (text = "") => ({
+  type: "SET_TEXT",
+  text
+})
+
 const filtersReducer = (state = filtersDefaultState, action) => {
   switch(action.type){
+    case "SET_TEXT":
+    return {
+      ...state,
+      text: action.text
+    }
     default: 
     return state
   }
@@ -90,6 +100,8 @@ store.dispatch(addExpense({ description: "Keyboard", amount: 10000 }));
 store.dispatch(removeExpense({ id: expense1.expense.id }))
 
 store.dispatch(editExpense(expense2.expense.id, { amount: 500 }))
+
+store.dispatch(setTextFilter("Rent"));
 
 console.log(expense1)
 const demoState = {
