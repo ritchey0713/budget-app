@@ -2,10 +2,10 @@ import { createStore, combineReducers } from 'redux';
 import uuid from 'uuid'
 
 const addExpense = (
-  { description = "", 
-    note = "", 
-    amount = 0, 
-    createdAt = 0 
+  { description = "",
+    note = "",
+    amount = 0,
+    createdAt = 0
   } = {}) => ({
   type: "ADD_EXPENSE",
   expense: {
@@ -38,9 +38,9 @@ const expensesReducer = (state = expensesDefaultState, action) => {
         ...state,
         action.expense
       ]
-    case "REMOVE_EXPENSE": 
+    case "REMOVE_EXPENSE":
       return state.filter(({ id }) => id !== action.id
-      ) 
+      )
     case "EDIT_EXPENSE":
       return state.map((expense) => {
         if(expense.id === action.id){
@@ -51,7 +51,7 @@ const expensesReducer = (state = expensesDefaultState, action) => {
         }else{
           return expense
         }
-      })  
+      })
 
     default:
     return state
@@ -98,12 +98,12 @@ const filtersReducer = (state = filtersDefaultState, action) => {
     case "SORT_BY_AMOUNT":
     return {
       ...state,
-      sortBy: "Amount"
+      sortBy: "amount"
     }
     case "SORT_BY_DATE":
-    return { 
+    return {
       ...state,
-      sortBy: "Date"
+      sortBy: "date"
     }
     case "SET_START_DATE":
     return {
@@ -112,10 +112,10 @@ const filtersReducer = (state = filtersDefaultState, action) => {
     }
     case "SET_END_DATE":
     return {
-      ...state, 
+      ...state,
       endDate: action.date
     }
-    default: 
+    default:
     return state
   }
 }
@@ -125,9 +125,15 @@ const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
   return expenses.filter((expense) => {
     const startDateMatch = typeof startDate !== 'number' || expense.createdAt >= startDate;
     const endDateMatch = typeof endDate !== "number" || expense.createdAt <= endDate;
-    const textMatch = true;
+    const textMatch = expense.description.toLowerCase().includes(text.toLowerCase())
 
     return startDateMatch && endDateMatch && textMatch
+  }).sort((a,b) => {
+    if (sortBy === "date"){
+      return a.createdAt < b.createdAt ? 1 : -1
+    }else if(sortBy === "amount"){
+      return a.amount < b.amount ? 1 : -1
+    }
   })
 }
 
@@ -144,7 +150,7 @@ store.subscribe(() => {
   console.log(visibleExpenses)
 })
 
-const expense1 = store.dispatch(addExpense({ description: "Rent", amount: 100, createdAt: 1000 }));
+const expense1 = store.dispatch(addExpense({ description: "Rent", amount: 1000, createdAt: -221000 }));
 const expense2 = store.dispatch(addExpense({ description: "Coffee", amount: 300, createdAt: -1000 }));
 // store.dispatch(addExpense({ description: "Keyboard", amount: 10000 }));
 
@@ -152,13 +158,13 @@ const expense2 = store.dispatch(addExpense({ description: "Coffee", amount: 300,
 
 // store.dispatch(editExpense(expense2.expense.id, { amount: 500 }))
 
-// store.dispatch(setTextFilter("Rent"));
+// store.dispatch(setTextFilter("e"));
 
-// store.dispatch(sortByAmount())
+store.dispatch(sortByAmount())
 // store.dispatch(sortByDate())
 
 // store.dispatch(setStartDate())
-   store.dispatch(setStartDate(125))
+   // store.dispatch(setStartDate(125))
 // store.dispatch(setEndDate(1250))
 // store.dispatch(setEndDate())
 
@@ -179,13 +185,13 @@ const demoState = {
   }
 }
 
-const user = {
-  name: "John", 
-  age: 22
-}
-
-console.log({
-  ...user,
-  location: "USA",
-  age: 28
-})
+// const user = {
+//   name: "John",
+//   age: 22
+// }
+//
+// console.log({
+//   ...user,
+//   location: "USA",
+//   age: 28
+// })
