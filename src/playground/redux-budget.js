@@ -184,7 +184,6 @@ const demoState = {
     endDate: undefined
   }
 }
-
 // const user = {
 //   name: "John",
 //   age: 22
