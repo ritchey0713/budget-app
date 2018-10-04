@@ -2,12 +2,10 @@ export const setTextFilter = (text = "") => ({
   type: "SET_TEXT",
   text
 })
-export 
-const sortByAmount = () => ({
+export const sortByAmount = () => ({
   type: "SORT_BY_AMOUNT"
 })
-export 
-const sortByDate = () => ({
+export const sortByDate = () => ({
   type: "SORT_BY_DATE"
 })
 
