@@ -48,6 +48,7 @@ class ExpenseListFilters extends Component {
           onFocusChange={this.onFocusChange}
           numberOfMonths={1}
           isOutsideRange={() => false}
+          showClearDates={true}
         />
     </div>
     )
