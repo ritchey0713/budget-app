@@ -28,3 +28,33 @@ test("should set sortBy to date", () => {
   const state = filtersReducer(currentState, action)
   expect(state.sortBy).toBe("date")
 })
+
+test("should set text filter", () => {
+  const text = "test filter"
+  const action = {
+    type: "SET_TEXT",
+    text
+  }
+  const state = filtersReducer(undefined, action)
+  expect(state.text).toBe(text)
+})
+
+test("should set startDate filter", () => {
+  const startDate = moment(0)
+  const action = {
+    type: "SET_START_DATE",
+    date: startDate
+  }
+  const state = filtersReducer(undefined, action)
+  expect(state.startDate).toBe(startDate)
+})
+
+test('should set endDate filter', () => {
+  const endDate = moment(0)
+  const action = {
+    type: "SET_END_DATE",
+    date: endDate
+  }
+  const state = filtersReducer(undefined, action)
+  expect(state.endDate).toBe(endDate)
+})
