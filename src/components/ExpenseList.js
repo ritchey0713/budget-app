@@ -11,14 +11,6 @@ const ExpenseList = (props) => (
   </div>
 )
 
-// const ConnectedExpenseList = connect((state) => {
-//   return {
-//     expenses: state.expenses
-//   }
-// })(ExpenseList);
-
-// export default ConnectedExpenseList
-
 const mapStateToProps = (state) => {
   return {
     expenses: selectExpenses(state.expenses, state.filters)
