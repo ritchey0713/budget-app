@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should render ExpenseList with epmty message  1`] = `
+<div>
+  <p>
+    No Expenses
+  </p>
+</div>
+`;
+
 exports[`should render ExpenseList with expenses 1`] = `
 <div>
   <ExpenseListItem
