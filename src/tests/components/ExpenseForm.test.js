@@ -61,6 +61,15 @@ test('should not set amount with bad data', () => {
 
 test('should call onSubmit prop for valid form submit', () => {
   const onSubmitSpy = jest.fn()
-  onSubmitSpy('Andrew', "Columbus")
-  expect(onSubmitSpy).toHaveBeenCalledWith('Andrew', "Columbus")
+  const wrapper = shallow(<ExpenseForm expense={expenses[0]} onSubmit={onSubmitSpy}/>)
+  wrapper.find('form').simulate('submit', {
+    preventDefault: () => { }
+  })
+  expect(wrapper.state('error')).toBe("")
+  expect(onSubmitSpy).toHaveBeenLastCalledWith({
+    description: expenses[0].description,
+    amount: expenses[0].amount,
+    note: expenses[0].note,
+    createdAt: expenses[0].createdAt
+  })
 })
