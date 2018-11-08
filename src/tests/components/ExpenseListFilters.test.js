@@ -37,3 +37,33 @@ test('should match snapshot with alt data', () => {
   })
   expect(wrapper).toMatchSnapshot()
 })
+
+test('should handle sort Text change', () => {
+  const value = 'Phone'
+  wrapper.find('input').at(0).simulate('change', {
+    target: { value }
+  })
+  expect(setTextFilter).toHaveBeenLastCalledWith(value)
+})
+
+test('should handle sort by date', () => {
+  const value = 'date'
+  wrapper.setProps({
+    filters: altFilters
+  })
+  wrapper.find('select').simulate('change', {
+    target: { value }
+  })
+  expect(sortByDate).toHaveBeenCalled()
+})
+
+test('should sort by amount', () => {
+  const value = 'amount'
+  wrapper.setProps({
+    filters: altFilters
+  })
+  wrapper.find('select').simulate('change', {
+    target: { value }
+  })
+  expect(sortByAmount).toHaveBeenCalled()
+})
